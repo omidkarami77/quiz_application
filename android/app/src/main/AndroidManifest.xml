@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.omid.quiz_application">
    <application
-        android:label="quiz_application"
+        android:label="کوییز"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

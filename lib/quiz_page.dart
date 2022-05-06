@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_application/constants/Constants.dart';
 import 'package:quiz_application/data/Question.dart';
+import 'package:quiz_application/screens/result_screen.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({Key? key}) : super(key: key);
@@ -9,10 +10,39 @@ class QuizPage extends StatefulWidget {
   State<QuizPage> createState() => _QuizPageState();
 }
 
+
+
+
+
+
+
+
+
+
 class _QuizPageState extends State<QuizPage> {
   int shownQuestionIndex = 0;
   Question? selectedQuestion;
   bool isFinalAsnwerSubmitted = false;
+  int correctAnswer = 0;
+  List<String> correctAnswerIndex = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +53,13 @@ class _QuizPageState extends State<QuizPage> {
         title: Text('${selectedQuestion!.answerList[index]}',
             textAlign: TextAlign.end),
         onTap: () {
+          if (selectedQuestion!.correctAnswer == index) {
+            print('correct');
+            correctAnswer += 1;
+          } else {
+            print('incorrect');
+          }
+
           if (shownQuestionIndex == getQuestions().length - 1) {
             isFinalAsnwerSubmitted = true;
           }
@@ -41,7 +78,7 @@ class _QuizPageState extends State<QuizPage> {
       appBar: AppBar(
         backgroundColor: Colors.blue[800],
         title: Text(
-          ' سوال${shownQuestionIndex +1} از ${getQuestions().length}',
+          ' سوال${shownQuestionIndex + 1} از ${getQuestions().length}',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -57,22 +94,28 @@ class _QuizPageState extends State<QuizPage> {
                   AssetImage('images/${selectedQuestion!.imageNameNumber}.png'),
             ),
             SizedBox(
-              height: 30,
+              height: 3,
             ),
-            Text(
-              selectedQuestion!.questionTitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                selectedQuestion!.questionTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              ),
             ),
             SizedBox(
-              height: 30,
+              height: 10,
             ),
             ...List.generate(4, (index) {
               return getOptionItem(index);
             }),
             if (isFinalAsnwerSubmitted)
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext build) => ResultScreen(resultAnswer: correctAnswer,)));
+                },
                 child: Text(
                   'مشاهده نتایج آزمون',
                   style: TextStyle(
