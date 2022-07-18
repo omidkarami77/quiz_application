@@ -10,39 +10,12 @@ class QuizPage extends StatefulWidget {
   State<QuizPage> createState() => _QuizPageState();
 }
 
-
-
-
-
-
-
-
-
-
 class _QuizPageState extends State<QuizPage> {
   int shownQuestionIndex = 0;
   Question? selectedQuestion;
   bool isFinalAsnwerSubmitted = false;
   int correctAnswer = 0;
   List<String> correctAnswerIndex = [];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +87,9 @@ class _QuizPageState extends State<QuizPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext build) => ResultScreen(resultAnswer: correctAnswer,)));
+                      builder: (BuildContext build) => ResultScreen(
+                            resultAnswer: correctAnswer,
+                          )));
                 },
                 child: Text(
                   'مشاهده نتایج آزمون',
@@ -124,7 +99,7 @@ class _QuizPageState extends State<QuizPage> {
                   textAlign: TextAlign.center,
                 ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red[700],
+                  backgroundColor: Colors.red[700],
                   minimumSize: Size(200, 40),
                 ),
               ),
